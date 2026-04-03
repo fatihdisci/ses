@@ -11,7 +11,7 @@ Detailed implementation notes continue in their phase-specific files.
 |---|---|---|
 | 01 — Architecture & Stack | ✅ Completed | `docs/01-architecture-and-stack.md` |
 | 02 — UI/UX Design System | ⏳ In progress | `docs/02-ui-ux-design-system.md` |
-| 03 — Frontend Components | ⏳ In progress | `docs/03-frontend-components.md` |
+| 03 — Frontend Components | ⏳ Pending | `docs/03-frontend-components.md` |
 | 04 — AI Vision Integration | ✅ Completed | `docs/04-ai-vision-integration.md` |
 | 05 — Testing & Refinement | ⏳ Pending | `docs/05-testing-and-refinement.md` |
 
