@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens (Tailwind v4 @theme) ─────────────────────────────────── */
+@theme {
+  /* Cosmic palette */
+  --color-cosmic-950: #0d0a1a;
+  --color-cosmic-900: #130e2e;
+  --color-cosmic-800: #1c1547;
+  --color-cosmic-700: #2d2468;
+  --color-cosmic-600: #4338a8;
+
+  /* Gold palette */
+  --color-gold-200: #fae89c;
+  --color-gold-300: #f8d96a;
+  --color-gold-400: #f5c842;
+  --color-gold-500: #d4a017;
+
+  /* Silver palette */
+  --color-silver-100: #f0f2f8;
+  --color-silver-200: #d8dce8;
+  --color-silver-300: #b0b8cc;
+
+  /* Medical */
+  --color-medical-white: #fafbff;
+
+  /* Typography */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-geist-sans), Inter, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* Shadows */
+  --shadow-gold-glow: 0 0 30px rgba(245, 200, 66, 0.25);
+  --shadow-cosmic-card: 0 8px 32px rgba(13, 10, 26, 0.6);
+
+  /* Animations */
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-gold: pulse-gold 3s ease-in-out infinite;
+
+  /* Keyframes */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 20px rgba(245, 200, 66, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(245, 200, 66, 0.5); }
+  }
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-cosmic-950);
+    color: var(--color-silver-100);
+    font-family: var(--font-body);
+    min-height: 100dvh;
+  }
+
+  /* Cosmic scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-cosmic-900); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-cosmic-700);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-gold-500); }
+}
+
+/* ─── Utilities ───────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Gold text shimmer — apply to headings */
+  .text-gold-shimmer {
+    background: linear-gradient(
+      135deg,
+      var(--color-gold-400) 0%,
+      var(--color-gold-200) 50%,
+      var(--color-gold-400) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* Frosted glass card */
+  .glass-card {
+    background: rgba(28, 21, 71, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 200, 66, 0.12);
+  }
+
+  /* Cosmic background gradient */
+  .bg-cosmic-gradient {
+    background: radial-gradient(ellipse at top, var(--color-cosmic-800) 0%, var(--color-cosmic-950) 70%);
+  }
+
+  /* Paywall blur for locked content */
+  .content-locked {
+    filter: blur(6px);
+    user-select: none;
+    pointer-events: none;
+  }
+}
