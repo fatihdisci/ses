@@ -23,6 +23,21 @@ export interface ReadingSession {
 
 // ─── Reading Results ──────────────────────────────────────────────────────────
 
+
+
+export interface AnalysisTraceStep {
+  step: string
+  status: 'ok' | 'error'
+  message: string
+}
+
+export interface AnalysisProviderAttempt {
+  provider: 'google' | 'openai'
+  model: string
+  ok: boolean
+  error?: string
+}
+
 export interface FootReading {
   sessionId: string
   status: SessionStatus
@@ -35,6 +50,10 @@ export interface FootReading {
   full?: {
     mystical: MysticalReading
     careAdvice: CareAdvice
+  }
+  trace?: {
+    steps: AnalysisTraceStep[]
+    providers: AnalysisProviderAttempt[]
   }
 }
 
