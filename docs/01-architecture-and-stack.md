@@ -23,7 +23,7 @@ user-uploaded photographs. It monetises via a freemium micro-transaction model (
 | Icons | Lucide React | latest | Tree-shakeable SVG icons; consistent stroke-width style |
 | Toasts | Sonner | 2.x | Portal-based; promise API; stacking + swipe-to-dismiss on mobile |
 | Class Utilities | clsx + tailwind-merge | latest | `cn()` helper for safe conditional class composition |
-| AI Vision | Claude API (Anthropic) | Phase 4 | `claude-opus-4-6` or `claude-sonnet-4-6` with vision; streaming responses |
+| AI Vision | Google Gemini + OpenAI | Phase 4 | Cost-efficient primary (`gemini-2.5-flash`) with OpenAI fallback (`gpt-4.1-mini`) |
 | Payments | Lemon Squeezy / Stripe | Phase 3 | Drop-in checkout modal; no shopping cart; webhook for unlock |
 
 ---
@@ -179,7 +179,11 @@ Cycled during AI analysis — defined in `LOADING_MESSAGES` constant:
 
 ```bash
 # .env.local — never committed
-ANTHROPIC_API_KEY=        # Claude API (Phase 4)
+AI_VISION_PROVIDER=auto    # auto | google | openai
+GOOGLE_API_KEY=           # Gemini API key (Phase 4)
+GOOGLE_VISION_MODEL=gemini-2.5-flash
+OPENAI_API_KEY=           # OpenAI API key (fallback)
+OPENAI_VISION_MODEL=gpt-4.1-mini
 LEMONSQUEEZY_API_KEY=     # Payment gateway (Phase 3)
 LEMONSQUEEZY_WEBHOOK_SECRET=
 NEXT_PUBLIC_APP_URL=      # Canonical URL for OG image
@@ -216,5 +220,5 @@ npm run type-check   # tsc --noEmit
 | **1 — Foundation** ✓ | Scaffold, config, tokens, folder structure, docs |
 | **2 — Upload UI** | Landing page, DropZone, ImagePreview, validation, Sonner toasts |
 | **3 — Results UI** | ReadingCard, MysticalSection, CareAdvice, PaywallCTA, blur/unlock animation |
-| **4 — AI Integration** | Claude Vision API, streaming route handler, prompt engineering |
+| **4 — AI Integration** | Google/OpenAI vision route, fallback strategy, prompt engineering |
 | **5 — Polish & Testing** | Accessibility, error states, loading skeletons, E2E tests |
