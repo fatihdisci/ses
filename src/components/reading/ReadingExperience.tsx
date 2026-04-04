@@ -172,24 +172,36 @@ export function ReadingExperience({ sessionId }: { sessionId: string }) {
       <motion.section variants={reduceMotion ? undefined : fadeInUp} className="glass-card relative overflow-hidden rounded-2xl p-5 md:p-8">
         <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gold-300/10 blur-3xl" />
         <div className="mb-4 flex flex-wrap items-center gap-2">
-          <a href="#reading-teaser" className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10">
+          <a
+            href="#reading-teaser"
+            className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-100"
+          >
             Teaser
           </a>
-          <a href="#reading-full" className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10">
+          <a
+            href="#reading-full"
+            className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-100"
+          >
             Full Reading
           </a>
-          <a href="#reading-care" className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10">
+          <a
+            href="#reading-care"
+            className="rounded-full border border-silver-200/20 px-2.5 py-1 text-xs text-silver-200 transition hover:bg-silver-200/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-100"
+          >
             Care Plan
           </a>
           <button
             type="button"
             onClick={handleCopySummary}
-            className="inline-flex items-center gap-1 rounded-full border border-gold-300/30 px-2.5 py-1 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/10"
+            className="inline-flex items-center gap-1 rounded-full border border-gold-300/30 px-2.5 py-1 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200"
           >
             <Copy className="h-3.5 w-3.5" />
             {copiedSummary ? 'Copied' : 'Copy summary'}
           </button>
         </div>
+        <p className="sr-only" aria-live="polite">
+          {copiedSummary ? 'Session summary copied to clipboard.' : ''}
+        </p>
         <p className="text-xs tracking-wide text-gold-200">SESSION #{data.sessionId.slice(0, 8)}</p>
         <h1 id="reading-teaser" className="mt-3 max-w-3xl font-display text-3xl leading-[1.08] tracking-tight text-silver-100 md:text-6xl">
           {data.teaser.headline}

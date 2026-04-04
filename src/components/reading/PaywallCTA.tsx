@@ -164,7 +164,7 @@ export function PaywallCTA({ paymentLink, sessionId, onUnlock }: PaywallCTAProps
           disabled={isLoading}
           aria-label={`Unlock full report for ${PRICE_DISPLAY}`}
           aria-busy={isLoading}
-          className="hidden min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-6 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 md:inline-flex"
+          className="hidden min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-6 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200 disabled:cursor-not-allowed disabled:opacity-60 md:inline-flex"
         >
           <Sparkles className="h-4 w-4" />
           {isLoading ? 'Unlocking...' : `Unlock ${PRICE_DISPLAY}`}
@@ -181,12 +181,15 @@ export function PaywallCTA({ paymentLink, sessionId, onUnlock }: PaywallCTAProps
           onClick={handleUnlock}
           disabled={isLoading}
           aria-label={`Quick unlock for ${PRICE_DISPLAY}`}
-          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-5 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-5 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200 disabled:cursor-not-allowed disabled:opacity-60"
         >
           <Sparkles className="h-4 w-4" />
           {isLoading ? 'Unlocking...' : `Unlock ${PRICE_DISPLAY}`}
         </button>
       </div>
+      <p className="sr-only" role="status" aria-live="polite">
+        {isLoading ? 'Opening secure checkout.' : ''}
+      </p>
     </motion.div>
   )
 }

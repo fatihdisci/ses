@@ -183,6 +183,7 @@ export default function Home() {
           onSubmit={handleSubmit}
           className="glass-card rounded-2xl p-5 md:p-8"
           aria-busy={isSubmitting}
+          aria-describedby={error ? 'analysis-error upload-help' : 'upload-help'}
         >
           <div className="flex items-end justify-between gap-3">
             <div>
@@ -246,7 +247,7 @@ export default function Home() {
             type="submit"
             disabled={!canSubmit}
             aria-disabled={!canSubmit}
-            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-6 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-6 py-3 font-semibold text-cosmic-950 shadow-gold-glow transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
             {isSubmitting ? 'Analyzing...' : 'Start reading'}
@@ -256,14 +257,14 @@ export default function Home() {
             <button
               type="button"
               onClick={handleResetForm}
-              className="rounded-full border border-silver-200/25 px-3 py-1.5 text-xs font-semibold text-silver-200 transition hover:bg-silver-200/10"
+              className="rounded-full border border-silver-200/25 px-3 py-1.5 text-xs font-semibold text-silver-200 transition hover:bg-silver-200/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-100"
             >
               Reset inputs
             </button>
             {error ? (
               <button
                 type="submit"
-                className="rounded-full border border-gold-300/35 px-3 py-1.5 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/10"
+                className="rounded-full border border-gold-300/35 px-3 py-1.5 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200"
               >
                 Retry analysis
               </button>
@@ -280,7 +281,7 @@ export default function Home() {
           ) : null}
 
           {error ? (
-            <p className="mt-4 inline-flex items-center gap-2 text-sm text-red-200" role="alert" aria-live="assertive">
+            <p id="analysis-error" className="mt-4 inline-flex items-center gap-2 text-sm text-red-200" role="alert" aria-live="assertive">
               <AlertCircle className="h-4 w-4" />
               {error}
             </p>
@@ -318,7 +319,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setTraceExpanded((prev) => !prev)}
-                    className="mt-3 rounded-full border border-gold-300/35 px-3 py-1.5 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/15"
+                    className="mt-3 rounded-full border border-gold-300/35 px-3 py-1.5 text-xs font-semibold text-gold-200 transition hover:bg-gold-300/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200"
                     aria-expanded={traceExpanded}
                     aria-controls="trace-panel"
                   >
@@ -335,7 +336,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setProviderExpanded((prev) => !prev)}
-                    className="rounded-full border border-gold-300/30 px-2.5 py-1 text-[11px] font-semibold text-gold-200 transition hover:bg-gold-300/10"
+                    className="rounded-full border border-gold-300/30 px-2.5 py-1 text-[11px] font-semibold text-gold-200 transition hover:bg-gold-300/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200"
                     aria-expanded={providerExpanded}
                     aria-controls="provider-attempts"
                   >
@@ -361,10 +362,13 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={handleCopyTraceJson}
-                  className="mt-3 rounded-full border border-silver-200/25 px-3 py-1.5 text-xs font-semibold text-silver-200 transition hover:bg-silver-200/10"
+                  className="mt-3 rounded-full border border-silver-200/25 px-3 py-1.5 text-xs font-semibold text-silver-200 transition hover:bg-silver-200/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-silver-100"
                 >
                   {copiedTrace ? 'Trace copied' : 'Copy trace JSON'}
                 </button>
+                <p className="sr-only" aria-live="polite">
+                  {copiedTrace ? 'Trace JSON copied to clipboard.' : ''}
+                </p>
               </div>
             ) : null}
           </div>
@@ -389,7 +393,7 @@ export default function Home() {
           </div>
           <Link
             href={`/reading/${result.sessionId}`}
-            className="inline-flex items-center justify-center rounded-full border border-gold-300/50 bg-gold-300/20 px-6 py-3 text-sm font-semibold text-gold-100 transition hover:bg-gold-300/30"
+            className="inline-flex items-center justify-center rounded-full border border-gold-300/50 bg-gold-300/20 px-6 py-3 text-sm font-semibold text-gold-100 transition hover:bg-gold-300/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-200"
           >
             Open reading page
           </Link>
