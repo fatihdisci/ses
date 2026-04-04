@@ -1,6 +1,6 @@
-# 02 — UI/UX Design System
+﻿# 02 â€” UI/UX Design System
 
-**STATUS: IN PROGRESS — Phase 2 initiated (April 3, 2026)**
+**STATUS: COMPLETED - Phase 2 closed (April 3, 2026)**
 
 ---
 
@@ -53,7 +53,7 @@ Primary flow:
 
 ### 3.4 Paywall Block
 - **Headline:** benefit-focused and specific.
-- **Feature bullets:** 3–5 concise outcomes.
+- **Feature bullets:** 3â€“5 concise outcomes.
 - **Price line:** simple, no hidden conditions.
 - **Primary button:** high-contrast action.
 - **Secondary action:** subtle dismiss/continue later.
@@ -65,7 +65,7 @@ Primary flow:
 - **Spacing scale:** 4, 8, 12, 16, 24, 32 px.
 - **Container width:**
   - Mobile: full bleed with 16 px side padding.
-  - Tablet/Desktop: centered container with max width 720–960 px (context dependent).
+  - Tablet/Desktop: centered container with max width 720â€“960 px (context dependent).
 - **Corner radius:**
   - Inputs/cards: 12 px.
   - Primary CTA: 9999 px pill or 12 px rounded rectangle (choose one pattern and keep consistent).
@@ -96,7 +96,7 @@ Primary flow:
 
 ## 6) Motion Principles
 
-- **Duration:** 120–240 ms for micro-interactions.
+- **Duration:** 120â€“240 ms for micro-interactions.
 - **Easing:** standard ease-out for entry, ease-in for exit.
 - **Purposeful only:** animation must communicate state change.
 - **Reduced motion support:** respect `prefers-reduced-motion`; fallback to opacity-only transitions.
@@ -125,7 +125,7 @@ Suggested usage:
 - **lg+:** increase whitespace, maintain readable line length, avoid over-wide text blocks.
 
 Guidelines:
-- Minimum tap targets: 44×44 px.
+- Minimum tap targets: 44Ã—44 px.
 - Avoid hover-only affordances.
 - Ensure all critical actions remain reachable without precision input.
 
@@ -146,8 +146,27 @@ Guidelines:
 - [x] Component anatomy defined for upload, progress, result, and paywall blocks.
 - [x] Spacing/state/motion rules drafted.
 - [x] Mobile-first breakpoint strategy established.
-- [ ] Token-level mapping finalized in code (colors/typography semantic tokens).
-- [ ] Accessibility checks executed against implemented UI.
+- [x] Token-level mapping finalized in code (colors/typography semantic tokens).
+- [x] Accessibility checks executed against implemented UI.
+
+---
+
+
+## 11) Implementation Audit (April 3, 2026)
+
+Phase 2 exit checks were executed against the implemented UI:
+
+- Semantic token layer finalized in `src/app/globals.css` (page/surface/text/accent/focus aliases).
+- Keyboard focus visibility enforced globally via `:focus-visible` ring styling.
+- Upload flow accessibility improved in `src/app/page.tsx`:
+  - required file inputs, grouped fieldset/legend, helper text association
+  - submit and loading states exposed with ARIA (`aria-busy`, `role="status"`)
+  - errors exposed with `role="alert"` and assertive live region
+- Reading/paywall accessibility improved in `src/components/reading/ReadingExperience.tsx` and `src/components/reading/PaywallCTA.tsx`:
+  - unlock/loading states announced via live regions
+  - CTA button includes explicit aria label and busy state
+
+Result: Phase 2 design-system code contract is now implemented and verified for baseline accessibility behavior.
 
 ---
 
@@ -157,3 +176,4 @@ Phase 3 can now implement components directly against this contract:
 - Build/adjust UI primitives and composite blocks to match anatomy.
 - Wire live progress and trace rendering into the status panel.
 - Implement paywall reveal states and unlock transition behavior.
+

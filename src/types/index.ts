@@ -51,6 +51,7 @@ export interface FootReading {
     mystical: MysticalReading
     careAdvice: CareAdvice
   }
+  paymentLink?: string
   trace?: {
     steps: AnalysisTraceStep[]
     providers: AnalysisProviderAttempt[]

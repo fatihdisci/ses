@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server'
 
 import { analyzeFootPhotos } from '@/lib/ai-vision'
 import { ACCEPTED_MIME_TYPES, MAX_FILE_SIZE_BYTES, PHOTO_SLOTS, type PhotoSlot } from '@/lib/constants'
+import { buildCheckoutUrl } from '@/lib/payments'
+import { createSession } from '@/lib/session-store'
 import type { FootReading } from '@/types'
 
 function isFile(value: FormDataEntryValue | null): value is File {
@@ -82,11 +84,25 @@ export async function POST(request: Request) {
 
     const { reading, trace } = await analyzeFootPhotos(images)
 
-    const response: FootReading & { trace: { steps: typeof steps; providers: typeof trace.providerTried } } = {
-      sessionId: randomUUID(),
-      status: 'free',
+    const sessionId = randomUUID()
+    const paymentLink = buildCheckoutUrl(sessionId)
+
+    if (!reading.full) {
+      throw new Error('Model response is missing full reading payload')
+    }
+
+    await createSession({
+      sessionId,
       teaser: reading.teaser,
       full: reading.full,
+      paymentLink,
+    })
+
+    const response: FootReading & { trace: { steps: typeof steps; providers: typeof trace.providerTried } } = {
+      sessionId,
+      status: 'free',
+      teaser: reading.teaser,
+      paymentLink,
       trace: {
         steps: [...steps, ...trace.steps],
         providers: trace.providerTried,
